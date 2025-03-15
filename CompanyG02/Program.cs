@@ -264,13 +264,78 @@ namespace CompanyG02
                 //        Console.WriteLine($"Employee : {emp.Id} , {emp.Name}");
                 //    }
                 //}
-                
-             
+
+
 
                 #endregion
 
 
 
+                #region Left outer join , Cross join
+
+                //var GroupJoinRes = companyDBContext.Departments.GroupJoin(companyDBContext.Employees, d => d.DepartmentId, e => e.DepartmentId,
+                //           (department, emps) => new
+                //           {
+                //               department,
+                //               emps = emps.DefaultIfEmpty()
+                //           }).SelectMany(gColl => gColl.emps, (gColl, emp) => new
+                //           {
+                //               emp,
+                //               d = gColl.department
+                //           });
+
+
+                //GroupJoinRes = from d in companyDBContext.Departments
+                //               join e in companyDBContext.Employees
+                //               on d.DepartmentId equals e.DepartmentId into employees
+                //               from emp in employees.DefaultIfEmpty()
+                //               select new
+                //               {
+                //                   emp,
+                //                   d
+                //               };
+
+                //foreach (var item in GroupJoinRes)
+                //{
+                //    Console.WriteLine($"{item.d.Name} , {item.emp?.Name ?? "No Employees"}");
+                //}
+
+
+
+                //var CrossJoin = from d in companyDBContext.Departments
+                //                from e in companyDBContext.Employees
+                //                select new
+                //                {
+                //                    d,
+                //                    e
+                //                };
+
+                //// Fluent Syntax
+                //var CrossJoinRes = companyDBContext.Departments.SelectMany(department => companyDBContext.Employees
+                //    .Select(emp => new
+                //    {
+                //        emp,
+                //        department
+                //    }));         
+
+
+                //foreach (var item in CrossJoin)
+                //{
+                //    Console.WriteLine($"{item.d.Name} , {item.e.Name}");
+                //}
+
+
+                #endregion
+
+
+                #region Mapping View
+
+                //var result = companyDBContext.EmployeeDepartmentView;
+
+                //foreach (var item in result)
+                //    Console.WriteLine($"{item.DepartmentId} , {item.DepartmentName} , {item.EmployeeId} , {item.EmployeeName}");
+
+                #endregion
 
 
                 companyDBContext.SaveChanges();
